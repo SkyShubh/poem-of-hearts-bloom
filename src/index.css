@@ -8,35 +8,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Romantic Pastel Color Palette */
+    --background: 340 50% 98%;
+    --foreground: 340 15% 25%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 340 30% 96%;
+    --card-foreground: 340 15% 30%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 340 40% 97%;
+    --popover-foreground: 340 15% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Romantic Pink Primary */
+    --primary: 340 65% 75%;
+    --primary-foreground: 340 20% 15%;
+    --primary-glow: 340 80% 85%;
+    --primary-soft: 340 45% 90%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Soft Lavender Secondary */
+    --secondary: 280 35% 88%;
+    --secondary-foreground: 280 20% 30%;
+    --secondary-glow: 280 50% 92%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Gentle Peach Accent */
+    --accent: 25 55% 85%;
+    --accent-foreground: 25 25% 25%;
+    --accent-glow: 25 70% 92%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted Warm Beige */
+    --muted: 30 25% 92%;
+    --muted-foreground: 30 15% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Romantic Rose for important actions */
+    --romantic: 350 70% 80%;
+    --romantic-foreground: 350 30% 20%;
+    --romantic-glow: 350 85% 90%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Soft error colors */
+    --destructive: 0 60% 75%;
+    --destructive-foreground: 0 30% 20%;
 
-    --radius: 0.5rem;
+    /* Elegant borders and inputs */
+    --border: 340 25% 88%;
+    --input: 340 30% 94%;
+    --ring: 340 65% 75%;
+
+    --radius: 1rem;
+
+    /* Gradient backgrounds */
+    --gradient-romantic: linear-gradient(135deg, hsl(var(--primary-soft)), hsl(var(--accent-glow)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-dreamy: linear-gradient(45deg, hsl(var(--secondary-glow)), hsl(var(--primary-glow)));
+
+    /* Elegant shadows */
+    --shadow-romantic: 0 8px 32px -8px hsl(var(--primary) / 0.3);
+    --shadow-soft: 0 4px 16px -4px hsl(var(--foreground) / 0.1);
+    --shadow-glow: 0 0 20px hsl(var(--primary-glow) / 0.4);
+
+    /* Smooth transitions */
+    --transition-romantic: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.3s ease-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +130,94 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-poppins;
+    background: var(--gradient-soft);
+    min-height: 100vh;
   }
+}
+
+@layer components {
+  /* Romantic component styles */
+  .romantic-card {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-gentle);
+  }
+
+  .romantic-card:hover {
+    box-shadow: var(--shadow-romantic);
+    transform: translateY(-2px);
+  }
+
+  .romantic-button {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-romantic);
+    background: hsl(var(--primary));
+  }
+
+  .romantic-button:hover {
+    background: hsl(var(--romantic));
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+  }
+
+  .romantic-input {
+    @apply bg-input/80 border border-border/60 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground;
+    backdrop-filter: blur(8px);
+    transition: var(--transition-gentle);
+  }
+
+  .romantic-input:focus {
+    @apply outline-none ring-2 ring-primary/50;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .spell-error {
+    border-bottom: 2px wavy hsl(var(--destructive));
+    border-bottom-style: wavy;
+  }
+
+  .floating-hearts {
+    @apply animate-pulse;
+  }
+
+  /* Mood card styles */
+  .mood-romantic { @apply bg-gradient-to-br from-primary-soft to-primary-glow; }
+  .mood-sad { @apply bg-gradient-to-br from-blue-200 to-blue-300; }
+  .mood-happy { @apply bg-gradient-to-br from-yellow-200 to-yellow-300; }
+  .mood-energetic { @apply bg-gradient-to-br from-orange-200 to-orange-300; }
+  .mood-hopeful { @apply bg-gradient-to-br from-green-200 to-green-300; }
+  .mood-apologetic { @apply bg-gradient-to-br from-purple-200 to-purple-300; }
+  .mood-rebellious { @apply bg-gradient-to-br from-red-200 to-red-300; }
+  .mood-ambitious { @apply bg-gradient-to-br from-indigo-200 to-indigo-300; }
+  .mood-lonely { @apply bg-gradient-to-br from-gray-200 to-gray-300; }
+  .mood-nostalgic { @apply bg-gradient-to-br from-amber-200 to-amber-300; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: var(--gradient-dreamy);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 5px hsl(var(--primary-glow))); }
+  to { filter: drop-shadow(0 0 20px hsl(var(--primary-glow))); }
 }
